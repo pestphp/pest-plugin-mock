@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Pest\Mock;
 
-use InvalidArgumentException;
 use Mockery;
+use Mockery\MockInterface;
 
 /**
- * @mixin \Mockery\MockInterface
+ * @template TObject as object
+ *
+ * @mixin TObject|MockInterface
  */
 final class Mock
 {
@@ -17,38 +19,35 @@ final class Mock
      *
      * @readonly
      *
-     * @var \Mockery\MockInterface|\Mockery\LegacyMockInterface
+     * @var TObject|MockInterface
      */
-    private $mock;
+    private object $mock;
 
     /**
      * Creates a new mock instance.
      *
-     * @param string|object $object
+     * @param class-string<TObject>|TObject $object
      */
-    public function __construct($object)
+    public function __construct(string | object $object)
     {
-        $this->mock = Mockery::mock($object);
+        /** @var TObject|MockInterface $mock */
+        $mock = Mockery::mock($object);
+
+        $this->mock = $mock;
     }
 
     /**
      * Define mock expectations.
      *
-     * @param mixed ...$methods
-     *
-     * @return \Mockery\MockInterface|\Mockery\LegacyMockInterface
+     * @return TObject|MockInterface
      */
-    public function expect(...$methods)
+    public function expect(callable ...$methods)
     {
         foreach ($methods as $method => $expectation) {
             /* @phpstan-ignore-next-line */
             $method = $this->mock
                 ->shouldReceive((string) $method)
                 ->once();
-
-            if (!is_callable($expectation)) {
-                throw new InvalidArgumentException(sprintf('Method %s from %s expects a callable as expectation.', $method, $method->mock()->mockery_getName(), ));
-            }
 
             $method->andReturnUsing($expectation);
         }
@@ -60,10 +59,8 @@ final class Mock
      * Proxies calls to the original mock object.
      *
      * @param array<int, mixed> $arguments
-     *
-     * @return mixed
      */
-    public function __call(string $method, array $arguments)
+    public function __call(string $method, array $arguments): mixed
     {
         /* @phpstan-ignore-next-line */
         return $this->mock->{$method}($arguments);

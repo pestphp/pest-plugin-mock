@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Pest\PluginName;
+use Pest\Mock\Mock;
 
-use Pest\Plugin;
-use PHPUnit\Framework\TestCase;
-
-Plugin::uses(Example::class);
-
-/**
- * @return TestCase
- */
-function example(string $argument)
-{
-    return test()->example(...func_get_args());
+if (!function_exists('mock')) {
+    /**
+     * Creates a new mock with the given class or object.
+     *
+     * @param string|object $object
+     */
+    function mock($object): Mock
+    {
+        return new Mock($object);
+    }
 }

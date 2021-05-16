@@ -47,6 +47,7 @@ final class Mock
             /* @phpstan-ignore-next-line */
             $method = $this->mock
                 ->shouldReceive((string) $method)
+                ->atLeast()
                 ->once();
 
             $method->andReturnUsing($expectation);

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v1.0.2 (2021-05-16)](https://github.com/pestphp/pest-plugin-expectations/compare/v1.0.1...v1.0.2)
+### Fixed
+- Expects at least one call per mock. ([1f37a29](https://github.com/pestphp/pest-plugin-mock/commit/1f37a29101a6f3caabbb15325623a69d4836adc3))
+
 ## [v1.0.1 (2021-05-16)](https://github.com/pestphp/pest-plugin-expectations/compare/v1.0.0...v1.0.1)
 ### Fixed
 - Improves type system. ([3cb7d0b](https://github.com/pestphp/pest-plugin-mock/commit/3cb7d0ba4d7a2dcb4d7055c8305775c7d9e65214))

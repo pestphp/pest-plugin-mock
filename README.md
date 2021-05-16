@@ -6,7 +6,7 @@ composer require pestphp/pest-plugin-mock --dev
 
 > If you want to start testing your application with Pest, visit the main **[Pest Repository](https://github.com/pestphp/pest)**.
 
-- Explore the docs: **[pestphp.com/docs/mock »](https://pestphp.com/docs/mock/)**
+- Explore the docs: **[pestphp.com/docs/plugins/mock »](https://pestphp.com/docs/plugins/mock)**
 - Follow us on Twitter: **[@pestphp »](https://twitter.com/pestphp)**
 - Join us on the Discord Server: **[discord.gg/bMAJv82 »](https://discord.gg/bMAJv82)**
 

@@ -6,6 +6,8 @@ namespace Pest\Mock;
 
 use Mockery;
 use Mockery\MockInterface;
+use ReflectionClass;
+use ReflectionMethod;
 
 /**
  * @template TObject as object
@@ -22,6 +24,8 @@ final class Mock
      * @var TObject|MockInterface
      */
     private object $mock;
+
+    private array $inheritedCalls = [];
 
     /**
      * Creates a new mock instance.
@@ -53,7 +57,31 @@ final class Mock
             $method->andReturnUsing($expectation);
         }
 
+        $this->buildInheritedCalls();
+
         return $this->mock;
+    }
+
+    public function inherit(object $implementation)
+    {
+        $mirror = new ReflectionClass($implementation);
+
+        foreach ($mirror->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+            $this->inheritedCalls[$method->getName()] = $implementation;
+        }
+
+        return $this;
+    }
+
+    private function buildInheritedCalls()
+    {
+        foreach ($this->inheritedCalls as $method => $implementation) {
+            $this->mock
+                ->shouldReceive((string) $method)
+                ->andReturnUsing(fn (...$args) => $implementation->$method(...$args));
+        }
+
+        $this->inheritedCalls = [];
     }
 
     /**
@@ -63,6 +91,8 @@ final class Mock
      */
     public function __call(string $method, array $arguments): mixed
     {
+        $this->buildInheritedCalls();
+
         /* @phpstan-ignore-next-line */
         return $this->mock->{$method}(...$arguments);
     }

@@ -25,6 +25,9 @@ final class Mock
      */
     private object $mock;
 
+    /**
+     * @var array<string, object>
+     */
     private array $inheritedCalls = [];
 
     /**
@@ -62,23 +65,29 @@ final class Mock
         return $this->mock;
     }
 
-    public function inherit(object $implementation)
+    /**
+     * Supply fallback classes to be used
+     * when expectations have not been
+     * set.
+     */
+    public function inherit(object ...$implementations): Mock
     {
-        $mirror = new ReflectionClass($implementation);
+        foreach ($implementations as $implementation) {
+            $mirror = new ReflectionClass($implementation);
 
-        foreach ($mirror->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-            $this->inheritedCalls[$method->getName()] = $implementation;
+            foreach ($mirror->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+                $this->inheritedCalls[$method->getName()] = $implementation;
+            }
         }
 
         return $this;
     }
 
-    private function buildInheritedCalls()
+    private function buildInheritedCalls(): void
     {
         foreach ($this->inheritedCalls as $method => $implementation) {
-            $this->mock
-                ->shouldReceive((string) $method)
-                ->andReturnUsing(fn (...$args) => $implementation->$method(...$args));
+            /* @phpstan-ignore-next-line */
+            $this->mock->shouldReceive($method)->andReturnUsing(fn (...$args) => $implementation->{$method}(...$args));
         }
 
         $this->inheritedCalls = [];

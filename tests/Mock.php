@@ -52,9 +52,9 @@ it('can inherit calls from a class', function () {
 });
 
 it('can override inherited calls', function () {
-    $mock = mock(Http::class)
+    $mock = mock(TestMock::class)
         ->inherit(new TestMock())
-        ->expect(get: fn() => 'bar');
+        ->expect(get: fn () => 'bar');
 
     expect($mock->get())->toBe('bar');
 });

@@ -27,11 +27,12 @@ final class Mock
      * Creates a new mock instance.
      *
      * @param class-string<TObject>|TObject $object
+     * @param array<mixed> $args
      */
-    public function __construct(string | object $object)
+    public function __construct(string | object $object, array $args)
     {
         /** @var TObject|MockInterface $mock */
-        $mock = Mockery::mock($object);
+        $mock = Mockery::mock($object, $args);
 
         $this->mock = $mock;
     }

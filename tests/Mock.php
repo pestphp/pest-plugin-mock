@@ -3,9 +3,16 @@
 use Mockery\CompositeExpectation;
 use Mockery\MockInterface;
 
-interface Http
+class Http
 {
-    public function get(): string;
+    public function __construct(public int $mockArg = 0)
+    {
+    }
+
+    public function get(): string
+    {
+        return '';
+    }
 }
 
 it('can mock methods', function () {
@@ -40,4 +47,10 @@ it('passes the arguments to the underlying mock correctly', function () {
         ->andReturn('foo');
 
     expect($mock->get())->toBe('foo');
+});
+
+it('passes the arguments to mock constructor', function () {
+    $mock = mock(Http::class, [1])->makePartial();
+
+    expect($mock->mockArg)->toBe(1);
 });

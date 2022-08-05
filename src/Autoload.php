@@ -11,11 +11,12 @@ if (!function_exists('mock')) {
      * @template TObject as object
      *
      * @param class-string<TObject>|TObject $object
+     * @param array<mixed> $args
      *
      * @return Mock<TObject>
      */
-    function mock(string | object $object): Mock
+    function mock(string | object $object, array $args = []): Mock
     {
-        return new Mock($object);
+        return new Mock($object, $args);
     }
 }

@@ -14,7 +14,7 @@ if (!function_exists('mock')) {
      *
      * @return Mock<TObject>
      */
-    function mock(string | object $object): Mock
+    function mock(string|object $object): Mock
     {
         return new Mock($object);
     }

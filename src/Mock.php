@@ -28,7 +28,7 @@ final class Mock
      *
      * @param class-string<TObject>|TObject $object
      */
-    public function __construct(string | object $object)
+    public function __construct(string|object $object)
     {
         /** @var TObject|MockInterface $mock */
         $mock = Mockery::mock($object);

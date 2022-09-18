@@ -26,7 +26,7 @@ final class Mock
     /**
      * Creates a new mock instance.
      *
-     * @param class-string<TObject>|TObject $object
+     * @param  class-string<TObject>|TObject  $object
      */
     public function __construct(string|object $object)
     {
@@ -59,7 +59,7 @@ final class Mock
     /**
      * Proxies calls to the original mock object.
      *
-     * @param array<int, mixed> $arguments
+     * @param  array<int, mixed>  $arguments
      */
     public function __call(string $method, array $arguments): mixed
     {

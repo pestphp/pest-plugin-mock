@@ -1,23 +1,7 @@
-# Changelog
-All notable changes to this project will be documented in this file.
+# Release Notes for 2.x
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
+## Unreleased
 
-## [Unreleased]
+## [v2.0.0 (2023-03-20)](https://github.com/pestphp/pest-plugin-mock/compare/v1.0.3...v2.0.0)
 
-## [v1.0.3 (2021-06-10)](https://github.com/pestphp/pest-plugin-expectations/compare/v1.0.2...v1.0.3)
-### Fixed
-- Parameters not being passed to underlying mock. ([#1](https://github.com/pestphp/pest-plugin-mock/pull/1))
-
-## [v1.0.2 (2021-05-16)](https://github.com/pestphp/pest-plugin-expectations/compare/v1.0.1...v1.0.2)
-### Fixed
-- Expects at least one call per mock. ([1f37a29](https://github.com/pestphp/pest-plugin-mock/commit/1f37a29101a6f3caabbb15325623a69d4836adc3))
-
-## [v1.0.1 (2021-05-16)](https://github.com/pestphp/pest-plugin-expectations/compare/v1.0.0...v1.0.1)
-### Fixed
-- Improves type system. ([3cb7d0b](https://github.com/pestphp/pest-plugin-mock/commit/3cb7d0ba4d7a2dcb4d7055c8305775c7d9e65214))
-
-## v1.0.0 (2021-05-15)
-### Changed
-- Stable version
+Please consult the [upgrade guide](https://pestphp.com/docs/upgrade-guide) and [release notes](https://pestphp.com/docs/announcing-pest2) in the official Pest documentation.

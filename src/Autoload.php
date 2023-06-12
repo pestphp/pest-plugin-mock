@@ -17,8 +17,4 @@ if (! function_exists('mock')) {
     {
         return new Mock($object);
     }
-} else {
-    $reflection = new ReflectionClass(Mockery::class);
-
-    @file_put_contents(dirname((string) $reflection->getFileName()).'/helpers.php', ''); // @phpstan-ignore-line
 }

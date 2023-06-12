@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Pest\Mock\Mock;
-use Pest\Mock\Mockery\Container;
 
 if (! function_exists('mock')) {
     /**
@@ -21,5 +20,5 @@ if (! function_exists('mock')) {
 } else {
     $reflection = new ReflectionClass(Mockery::class);
 
-    @file_put_contents(dirname($reflection->getFilename()) . '/helpers.php', '');
+    @file_put_contents(dirname((string) $reflection->getFileName()).'/helpers.php', ''); // @phpstan-ignore-line
 }

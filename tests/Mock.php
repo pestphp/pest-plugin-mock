@@ -2,6 +2,7 @@
 
 use Mockery\CompositeExpectation;
 use Mockery\MockInterface;
+use function Pest\Mock\mock;
 
 interface Http
 {
